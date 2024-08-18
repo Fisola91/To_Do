@@ -1,0 +1,16 @@
+.max-w-md.mx-auto.mt-6
+  = form_with model: @task, url: tasks_path, data: { turbo: false } do |f|
+    .my-6
+      = f.label "Title", class: "block text-gray-700 text-sm font-bold mb-2"
+      = f.text_field :title, autofocus: true, required: true, tabindex: 1, placeholder: " e.g Read",
+        class: "border border-gray-300 focus:outline-none rounded-md w-64 h-8 block placeholder-opacity-75"
+    .mb-2
+      = f.label "Description", class: "block text-gray-700 text-sm font-bold mb-2"
+      = f.text_field :description, autofocus: true, required: true, tabindex: 1, placeholder: " e.g Read",
+      class: "border border-gray-300 focus:outline-none rounded-md w-64 h-8 block placeholder-opacity-75"
+    .flex
+      - unless f.object.new_record?
+        = f.check_box :completed do
+        p.ml-2 Completed
+    .my-6
+      = f.submit "Submit", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-20 rounded-md focus:shadow-outline"
