@@ -1,0 +1,23 @@
+.flex.flex-col.items-center.justify-start.min-h-screen.pt-18
+  .max-w-md.mx-auto
+    <h6 class="text-center text-2xl font-bold">Log in</h6>
+    = form_for(resource, as: resource_name, url: session_path(resource_name), data: {turbo: false}) do |f|
+
+      .mt-6
+        = f.label :email
+        = f.email_field :email, autofocus: true, autocomplete: "email", class: border_line
+
+      .mt-6
+        = f.label :password
+        = f.password_field :password, autocomplete: "new-password", class: border_line
+
+      .mt-3
+        - if devise_mapping.rememberable?
+          = f.check_box :remember_me, class: "mr-1"
+          = f.label :remember_me
+
+      .my-4.
+        = f.submit "Log in", class: button_style_bg_blue
+
+      .mt-4
+        = render "devise/shared/links"
