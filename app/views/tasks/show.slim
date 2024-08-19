@@ -1,0 +1,21 @@
+.max-w-md.mx-auto.my-6.mb-4.text-2xl
+  .my-6
+    p.font-bold Title:
+    = @task.title
+  .my-6
+    p.font-bold Description:
+    p.w-full = @task.description
+
+  - if @task.status == "doing"
+    i.fa-solid.fa-square.mx-2
+    | This task is on-going
+  - else
+    i.fas.fa-check-square.mx-2
+    | This is task is completed
+  .flex.mt-8.items-center
+    p Task deadline:
+    p.mx-2.bg-gray-300.rounded-md.p-2 = @task.due_date.strftime("%a %d. %B")
+
+  = link_to tasks_path, class: "flex text-blue-500 mt-10 items-center" do
+    i.fa.fa-history.mx-2
+    | Back to list
