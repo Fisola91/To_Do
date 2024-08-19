@@ -15,9 +15,10 @@ class TasksController < ApplicationController
   def create
     @task = current_user.tasks.new(task_params)
     if @task.save
-      redirect_to tasks_path
+      redirect_to tasks_path, notice: 'Task was successfully created.'
     else
-      render "new"
+      p @task.errors.full_messages
+      render "new", status: :unprocessable_entity
     end
   end
 
@@ -26,12 +27,18 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = Task.find(params[:id].to_i)
+    @task = Task.find(params[:id])
     if @task.update(updated_task)
       redirect_to task_path(@task)
     else
       render :edit
     end
+  end
+
+  def destroy
+    @task = Task.find(params[:id])
+    @task.destroy
+    redirect_to tasks_path
   end
 
   private

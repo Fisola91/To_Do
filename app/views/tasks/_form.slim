@@ -8,12 +8,9 @@
     = f.text_field :description, autofocus: true, required: true, tabindex: 1, placeholder: " e.g Read",
     class: "border border-gray-300 focus:outline-none rounded-md w-64 h-8 block placeholder-opacity-75"
   .mt-2
-    - if @task.status == "completed"
-      = f.check_box :status, {checked: true, class: "mr-2"}
-      | completed
-    - else
+    - unless f.object.new_record?
       = f.check_box :status, class: "mr-2"
-      | doing
+      | completed
   .my-4
   = f.label :due_date, "Due Date", class: "block text-gray-700 text-sm font-bold mb-2"
   = f.date_select :due_date,
