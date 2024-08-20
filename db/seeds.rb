@@ -10,6 +10,8 @@
 
 User.destroy_all
 
-5.times do |digit|
-  User.create(email: "ayo#{digit}@gmail.com", password: "123456", password_confirmation: "123456")
-end
+User.create(name: "John", email: "john@gmail.com", password: "123456", password_confirmation: "123456")
+User.create(name: "Peter", email: "peter@gmail.com", password: "123456", password_confirmation: "123456")
+User.create(name: "Paul", email: "paul@gmail.com", password: "123456", password_confirmation: "123456")
+User.create(name: "Jerry", email: "jerry@gmail.com", password: "123456", password_confirmation: "123456")
+User.create(name: "Monday", email: "monday@gmail.com", password: "123456", password_confirmation: "123456")
