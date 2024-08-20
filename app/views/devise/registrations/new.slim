@@ -3,6 +3,9 @@
     <h6 class="text-center text-2xl font-bold">Sign up</h6>
     = form_for(resource, as: resource_name, url: registration_path(resource_name), data: {turbo: false}) do |f|
       = render "devise/shared/error_messages", resource: resource
+      .mt-6
+          = f.label :name
+          = f.text_field :name, autofocus: true, autocomplete: "name",  class: border_line
 
       .mt-6
         = f.label :email

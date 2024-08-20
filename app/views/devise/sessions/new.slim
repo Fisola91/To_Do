@@ -2,10 +2,9 @@
   .max-w-md.mx-auto
     <h6 class="text-center text-2xl font-bold">Log in</h6>
     = form_for(resource, as: resource_name, url: session_path(resource_name), data: {turbo: false}) do |f|
-
       .mt-6
-        = f.label :email
-        = f.email_field :email, autofocus: true, autocomplete: "email", class: border_line
+        = f.label :name
+        = f.text_field :name, autofocus: true, autocomplete: "name",  class: border_line
 
       .mt-6
         = f.label :password

@@ -12,7 +12,7 @@
         ul
           - @task.user_ids.each do |id|
             li.ml-4.text-xl
-              = User.find(id).email
+              = User.find(id).name
       - if @task.status == "doing"
         i.fa-solid.fa-square.mx-2
         | This task is on-going
