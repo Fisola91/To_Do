@@ -1,0 +1,6 @@
+ = form_with scope: :comment, url: task_comments_path(task_id: task), id: "comment-#{task}", method: :post, data: { turbo: false } do |f|
+  .flex
+    = f.text_field :content, placeholder: "  Add a comment",
+      class: "border border-gray-300 mt-4 ml-4 item-center focus:outline-none rounded-xl w-full h-10 block placeholder-opacity-75"
+    = button_tag(type: 'submit', class: "hover:bg-blue-200 text-blue-500 text-3xl font-bold px-2 rounded-md focus:shadow-outline") do
+      i#send.fa-regular.fa-paper-plane

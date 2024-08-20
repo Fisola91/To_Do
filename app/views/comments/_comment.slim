@@ -1,0 +1,11 @@
+- @task.comments.each do |comment|
+  .flex.my-4.items-center
+    p.font-bold = "#{comment.user.name}:"
+    p.ml-4 = comment.content
+    - if comment.user == current_user
+      .mt-2
+        = button_to task_comment_path(task_id: comment.task_id, id: comment.id), method: :delete, data: { turbo: false}, class: "text-red-500 ml-6" do
+          .flex.items-center
+            i.fa-solid.fa-trash.mr-2
+
+

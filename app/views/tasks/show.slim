@@ -32,6 +32,14 @@
           .flex.items-center
             i.fa-solid.fa-trash.mr-2
             | Delete
+  p.mt-12.font-bold.text-3xl.text-center Comments
+
+
+  #comments
+    = render "comments/comment", task: @task
+
+  = render "comments/form", task: @task
+
   = link_to tasks_path, class: "flex text-blue-500 mt-10 items-center" do
     i.fa.fa-history.mx-2
     | Back to list
