@@ -1,6 +1,6 @@
 class Task < ApplicationRecord
-  belongs_to :user
-  has_many :task_assignments
+  # belongs_to :user
+  has_many :task_assignments,  dependent: :destroy
   has_many :users, through: :task_assignments
 
   validates :title , presence: true

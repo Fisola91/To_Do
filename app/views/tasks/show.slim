@@ -1,13 +1,18 @@
 .max-w-md.mx-auto.my-6.mb-4.text-2xl
   .flex
     .mt-2
-      .my-6
+      .my-6.flex.text-2xl
         p.font-bold Title:
-        = @task.title
-      .my-6
+        p.ml-2 = @task.title
+      .my-6.text-2xl
         p.font-bold Description:
         p.w-full = @task.description
-
+      .my-6.flex.items-center
+        p.font-bold.text-xl Assigned to:
+        ul
+          - @task.user_ids.each do |id|
+            li.ml-4.text-xl
+              = User.find(id).email
       - if @task.status == "doing"
         i.fa-solid.fa-square.mx-2
         | This task is on-going

@@ -11,6 +11,11 @@
     = f.label "Description", class: "block text-gray-700 text-sm font-bold mb-2"
     = f.text_field :description, autofocus: true, required: true, tabindex: 1, placeholder: " To Do Description",
     class: "border border-gray-300 focus:outline-none rounded-md w-64 h-8 block placeholder-opacity-75"
+    / = f.select :user_ids, User.all, { multiple: true }
+  .mb-2.flex
+    = f.label "Assign To"
+    = f.select :user_ids, options_for_select(User.pluck(:email, :id)), {include_hidden: false}, :multiple => true
+
   .mt-2
     - unless f.object.new_record?
       = f.check_box :status, class: "mr-2"

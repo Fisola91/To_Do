@@ -1,7 +1,8 @@
 class TasksController < ApplicationController
 
   def index
-    @tasks = current_user.tasks
+    # @tasks = current_user.tasks
+    @tasks = Task.all
   end
 
   def new
@@ -13,7 +14,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = current_user.tasks.new(task_params)
+    @task = Task.new(task_params)
     if @task.save
       redirect_to tasks_path, notice: 'Task was successfully created.'
     else
@@ -43,7 +44,7 @@ class TasksController < ApplicationController
   private
 
     def task_params
-      params.require(:task).permit(:title, :description, :due_date, :status)
+      params.require(:task).permit(:title, :description, :due_date, :status, user_ids: [])
     end
 
     def status
