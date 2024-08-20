@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_20_102816) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_20_112606) do
   create_table "task_assignments", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "task_id", null: false
@@ -27,7 +27,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_20_102816) do
     t.date "due_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
+    t.integer "user_id"
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
