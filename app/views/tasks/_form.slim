@@ -1,11 +1,15 @@
 .max-w-md.mx-auto.mt-6
+  - if @task.errors.any?
+    ul
+      - @task.errors.full_messages.each do |message|
+        p.text-2xl.text-red-500.font-bold = message
   .my-4
     = f.label "Title", class: "block text-gray-700 text-sm font-bold mb-2"
-    = f.text_field :title, autofocus: true, required: true, tabindex: 1, placeholder: " e.g Read",
+    = f.text_field :title, autofocus: true, required: true, tabindex: 1, placeholder: " To Do Title",
       class: "border border-gray-300 focus:outline-none rounded-md w-64 h-8 block placeholder-opacity-75"
   .mb-2
     = f.label "Description", class: "block text-gray-700 text-sm font-bold mb-2"
-    = f.text_field :description, autofocus: true, required: true, tabindex: 1, placeholder: " e.g Read",
+    = f.text_field :description, autofocus: true, required: true, tabindex: 1, placeholder: " To Do Description",
     class: "border border-gray-300 focus:outline-none rounded-md w-64 h-8 block placeholder-opacity-75"
   .mt-2
     - unless f.object.new_record?
