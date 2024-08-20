@@ -12,11 +12,10 @@
     = f.text_field :description, autofocus: true, required: true, tabindex: 1, placeholder: " To Do Description",
     class: "border border-gray-300 focus:outline-none rounded-md w-64 h-8 block placeholder-opacity-75"
     / = f.select :user_ids, User.all, { multiple: true }
-  .mb-2.flex
-    = f.label "Assign To"
-    = f.select :user_ids, options_for_select(User.pluck(:email, :id)), {include_hidden: false}, :multiple => true
-
-  .mt-2
+  .mb-4
+    p.font-bold = f.label "Assign To"
+    = f.select :user_ids, options_for_select(User.pluck(:email, :id), f.object.user_ids), {include_hidden: false}, { multiple: true, class: "border border-gray-300 rounded-md px-3 py-1.5" }
+  .mt-4
     - unless f.object.new_record?
       = f.check_box :status, class: "mr-2"
       | completed
