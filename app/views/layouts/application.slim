@@ -15,7 +15,15 @@ html lang="en"
     <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/2.8.2/slimselect.min.css" rel="stylesheet"/>
 
   body
-    main data-controller="dialog" data-action="click->dialog#clickOutside"
+    main
+      .flex.justify-between.items-center.my-3.lg:container.mx-auto.lg:text-3xl
+        - if user_signed_in?
+          = button_to "Log out", destroy_user_session_path, method: :delete, data: {turbo: false}, class: "border border-blue-500 hover:bg-red-300 mr-4 text-red-500 font-bold py-2 px-4 rounded-full focus:shadow-outline"
+        - else
+          h1 To Bo list
+          .flex
+            = link_to "Login", new_user_session_path, class: "border border-blue-500 hover:bg-blue-300 mr-4 text-black font-normal py-2 px-4 rounded-full focus:shadow-outline"
+            = link_to "Register", new_user_registration_path, class: "border border-blue-500 hover:bg-blue-300 mr-4 text-black font-normal py-2 px-4 rounded-full focus:shadow-outline"
       .max-w-md.mx-auto.mt-4
         - flash.each do |key, value|
           = content_tag :div, value, class: "flash #{key} font-bold text-center", style: (key == "notice" ? "color: green;" : "color: red;")
