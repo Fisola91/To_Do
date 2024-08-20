@@ -1,6 +1,6 @@
 .max-w-md.mx-auto.my-6.mb-4.text-2xl
-  .flex
-    .mt-2
+  .flex.space-x-14
+    .ml-2
       .my-6.flex.text-2xl
         p.font-bold Title:
         p.ml-2 = @task.title
@@ -26,8 +26,13 @@
       = link_to tasks_path, class: "flex text-blue-500 mt-10 items-center" do
         i.fa.fa-history.mx-2
         | Back to list
-
-    .mt-2
-      = link_to edit_task_path(@task), class: "flex text-blue-500 items-center w-full" do
-        i.fa-solid.fa-pencil.mx-2
-        | Edit
+    .flex
+      .mt-2
+        = link_to edit_task_path(@task), class: "flex text-blue-500 items-center w-full" do
+          i.fa-solid.fa-pencil.mx-2
+          | Edit
+      .mt-2
+        = button_to task_path(@task), method: :delete, data: { turbo: false}, class: "text-red-500 ml-6" do
+          .flex.items-center
+            i.fa-solid.fa-trash.mr-2
+            | Delete
