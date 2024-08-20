@@ -17,7 +17,6 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to tasks_path, notice: 'Task was successfully created.'
     else
-      p @task.errors.full_messages
       render "new", status: :unprocessable_entity
     end
   end
