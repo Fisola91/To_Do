@@ -1,5 +1,5 @@
 class Task < ApplicationRecord
-  # belongs_to :user
+  belongs_to :task_creator, class_name: 'User', foreign_key: 'user_id'
   has_many :task_assignments,  dependent: :destroy
   has_many :users, through: :task_assignments
   has_many :comments, dependent: :destroy
