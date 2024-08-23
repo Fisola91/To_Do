@@ -1,7 +1,6 @@
 class TasksController < ApplicationController
 
   def index
-    # @tasks = current_user.tasks
     @tasks = Task.all
   end
 
@@ -14,7 +13,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.created_tasks.new(task_params)
     if @task.save
       redirect_to tasks_path, notice: 'Task was successfully created.'
     else
