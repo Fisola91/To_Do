@@ -20,10 +20,15 @@
         p.w-full = @task.description
       .my-6.flex.items-center
         p.font-bold.text-xl Collaborators:
-        ul
-          - @task.user_ids.each do |id|
-            li.ml-4.text-xl
-              = User.find(id).name
+
+        - if @task.user_ids.present?
+          ul
+            - @task.user_ids.each do |id|
+              li.ml-4.text-xl
+                = User.find(id).name
+        - else
+          p.ml-2 No collaborator
+
       - if @task.status == "doing"
         i.fa-solid.fa-square.mx-2.text.lg
         | This task is progress
