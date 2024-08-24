@@ -31,10 +31,12 @@
 
       - if @task.status == "doing"
         i.fa-solid.fa-square.mx-2.text.lg
-        | This task is progress
+        | This task is in progress
         .flex.mt-8.items-center
           p Task deadline:
           p.mx-2.bg-gray-100.rounded-full.p-2.text-blue-500.font-bold = @task.due_date.strftime("%a %d. %B")
+      - elsif @task.status == "pending"
+        p.text-yellow-500.font-bold This task is pending
       - else
         i.fas.fa-check-square.mx-2.text.lg
         | This task is completed
