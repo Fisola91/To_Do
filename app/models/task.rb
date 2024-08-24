@@ -8,7 +8,7 @@ class Task < ApplicationRecord
   validates :description, presence: true
   validates :due_date, presence: true
 
-  VALID_STATUSES = ['doing', 'completed']
+  VALID_STATUSES = ['doing', 'completed', "pending"]
 
   validates :status, inclusion: { in: VALID_STATUSES }
 end
