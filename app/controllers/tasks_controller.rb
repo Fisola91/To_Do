@@ -27,7 +27,7 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
-    if @task.update(updated_task)
+    if @task.update(task_params)
       redirect_to task_path(@task)
     else
       render :edit
@@ -44,17 +44,5 @@ class TasksController < ApplicationController
 
     def task_params
       params.require(:task).permit(:title, :description, :due_date, :status, user_ids: [])
-    end
-
-    def status
-      task_params.fetch(:status)
-    end
-
-    def status_value
-      status == "1" ? "completed" : "doing"
-    end
-
-    def updated_task
-      task_params.merge(status: status_value)
     end
 end
