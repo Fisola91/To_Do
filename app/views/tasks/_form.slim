@@ -11,22 +11,28 @@
     = f.label "Description", class: "block text-gray-700 text-sm font-bold mb-2"
     = f.text_field :description, autofocus: true, required: true, tabindex: 1, placeholder: " To Do Description",
     class: "border border-gray-300 focus:outline-none rounded-md w-64 h-8 block placeholder-opacity-75"
-    / = f.select :user_ids, User.all, { multiple: true }
+
   .mb-4
     p.font-bold = f.label "Collaborators"
     = f.select :user_ids, options_for_select(User.pluck(:name, :id), f.object.user_ids), {include_hidden: false}, { multiple: true, class: "border border-gray-300 rounded-md px-3 py-1.5" }
-  .mt-4
+  .mt-4.space-y-4
     - unless f.object.new_record?
-      = f.check_box :status, class: "mr-2"
-      | completed
+      .flex.flex-col
+        .flex.items-center.space-x-2
+          = f.radio_button :status, "doing"
+          = f.label :doing, "progress"
+        .flex.items-center.space-x-2
+          = f.radio_button :status, "pending"
+          = f.label :pending, "pending"
+        .flex.items-center.space-x-2
+          = f.radio_button :status, "completed"
+          = f.label :completed, "completed"
   .my-4
-  = f.label :due_date, "Due Date", class: "block text-gray-700 text-sm font-bold mb-2"
-  = f.date_select :due_date,
-                  order: [:day, :month, :year],
-                  prompt: true,
-                  start_year: @task.new_record? ? Time.now.year : @task.created_at.year,
-                  end_year: Time.now.year + 5,
-                  default: Time.now,
-                  use_month_names: Date::MONTHNAMES.compact
-  .my-6
-    = f.submit "Submit", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-20 rounded-md focus:shadow-outline"
+    = f.label :due_date, "Due Date", class: "block text-gray-700 text-sm font-bold mb-2"
+    = f.date_select :due_date,
+                    order: [:day, :month, :year],
+                    prompt: true,
+                    start_year: @task.new_record? ? Time.now.year : @task.created_at.year,
+                    end_year: Time.now.year + 5,
+                    default: Time.now,
+                    use_month_names: Date::MONTHNAMES.compact
