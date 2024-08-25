@@ -9,7 +9,7 @@
       class: "border border-gray-300 focus:outline-none rounded-md w-64 h-8 block placeholder-opacity-75"
   .mb-2
     = f.label "Description", class: "block text-gray-700 text-sm font-bold mb-2"
-    = f.text_field :description, autofocus: true, required: true, tabindex: 1, placeholder: " To Do Description",
+    = f.text_area :description, autofocus: true, required: true, tabindex: 1, placeholder: " To Do Description",
     class: "border border-gray-300 focus:outline-none rounded-md w-64 h-8 block placeholder-opacity-75"
 
   .mb-4
