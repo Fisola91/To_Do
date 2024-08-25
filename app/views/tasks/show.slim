@@ -19,12 +19,14 @@
         p.font-bold Description:
         p.w-full = @task.description
       .my-6.flex.items-center
+        p.font-bold.text-xl Task creator:
+        p.ml-2 = @task.task_creator.name
+      .my-6.flex.items-center
         p.font-bold.text-xl Collaborators:
-
         - if @task.user_ids.present?
           ul
             - @task.user_ids.each do |id|
-              li.ml-4.text-xl
+              li.ml-2.text-xl
                 = User.find(id).name
         - else
           p.ml-2 No collaborator
