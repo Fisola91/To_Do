@@ -9,7 +9,11 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = Task.find(params[:id])
+    @task = Task.find_by(id: params[:id])
+    unless @task
+      flash[:alert] = "Task #{params[:id]} not found."
+      redirect_to tasks_path
+    end
   end
 
   def create
