@@ -49,6 +49,4 @@
 
   = render "comments/form", task: @task
 
-  = link_to tasks_path, class: "flex text-blue-500 mt-10 items-center" do
-    i.fa.fa-history.mx-2
-    | Back to list
+  = back_to_list_button

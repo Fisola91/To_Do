@@ -3,36 +3,42 @@
     ul
       - @task.errors.full_messages.each do |message|
         p.text-2xl.text-red-500.font-bold = message
-  .my-4
-    = f.label "Title", class: "block text-gray-700 text-sm font-bold mb-2"
-    = f.text_field :title, autofocus: true, required: true, tabindex: 1, placeholder: " To Do Title",
-      class: "border border-gray-300 focus:outline-none rounded-md w-64 h-8 block placeholder-opacity-75"
-  .mb-2
-    = f.label "Description", class: "block text-gray-700 text-sm font-bold mb-2"
-    = f.text_area :description, autofocus: true, required: true, tabindex: 1, placeholder: " To Do Description",
-    class: "border border-gray-300 focus:outline-none rounded-md w-64 h-8 block placeholder-opacity-75"
+  = form_with model: @task, local: true, data: { turbo: false } do |f|
+    .my-4
+      = f.label "Title", class: task_form_label_styling
+      = f.text_field :title, autofocus: true, required: true, placeholder: " To Do Title",
+        class: task_form_text_field_styling
+    .mb-2
+      = f.label "Description", class: task_form_label_styling
+      = f.text_area :description, autofocus: true, required: true, tabindex: 1, placeholder: " To Do Description",
+      class: task_form_text_field_styling
 
-  .mb-4
-    p.font-bold = f.label "Collaborators"
-    = f.select :user_ids, options_for_select(User.pluck(:name, :id), f.object.user_ids), {include_blank: true}, { multiple: true, class: "border border-gray-300 rounded-md px-3 py-1.5" }
-  .mt-4.space-y-4
-    - unless f.object.new_record?
-      .flex.flex-col
-        .flex.items-center.space-x-2
-          = f.radio_button :status, "doing"
-          = f.label :doing, "progress"
-        .flex.items-center.space-x-2
-          = f.radio_button :status, "pending"
-          = f.label :pending, "pending"
-        .flex.items-center.space-x-2
-          = f.radio_button :status, "completed"
-          = f.label :completed, "completed"
-  .my-4
-    = f.label :due_date, "Due Date", class: "block text-gray-700 text-sm font-bold mb-2"
-    = f.date_select :due_date,
-                    order: [:day, :month, :year],
-                    prompt: true,
-                    start_year: @task.new_record? ? Time.now.year : @task.created_at.year,
-                    end_year: Time.now.year + 5,
-                    default: Time.now,
-                    use_month_names: Date::MONTHNAMES.compact
+    .mb-4
+      p.font-bold = f.label "Collaborators"
+      = f.select :user_ids, options_for_select(User.pluck(:name, :id), f.object.user_ids), {include_blank: true}, { multiple: true, class: "border border-gray-300 rounded-md px-3 py-1.5" }
+    .mt-4.space-y-4
+      - unless @task.new_record?
+        .flex.flex-col
+          .flex.items-center.space-x-2
+            = f.radio_button :status, "doing"
+            = f.label :doing, "progress"
+          .flex.items-center.space-x-2
+            = f.radio_button :status, "pending"
+            = f.label :pending, "pending"
+          .flex.items-center.space-x-2
+            = f.radio_button :status, "completed"
+            = f.label :completed, "completed"
+    .my-4
+      = f.label :due_date, "Due Date", class: task_form_label_styling
+      = f.date_select :due_date,
+                      order: [:day, :month, :year],
+                      prompt: true,
+                      start_year: @task.new_record? ? Time.now.year : @task.created_at.year,
+                      end_year: Time.now.year + 5,
+                      default: Time.now,
+                      use_month_names: Date::MONTHNAMES.compact
+
+    - if @task.new_record?
+      = f.submit "Submit", class: button_style_bg_blue
+    -else
+      = f.submit "Update", class: button_style_bg_blue

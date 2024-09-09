@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :find_task, only: %i(show edit update destroy)
 
   def index
     @tasks = Task.all
@@ -9,7 +10,6 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = Task.find_by(id: params[:id])
     unless @task
       flash[:alert] = "Task #{params[:id]} not found."
       redirect_to tasks_path
@@ -26,11 +26,9 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
   end
 
   def update
-    @task = Task.find(params[:id])
     if @task.update(task_params)
       redirect_to task_path(@task)
     else
@@ -39,7 +37,6 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task = Task.find(params[:id])
     @task.destroy
     redirect_to tasks_path
   end
@@ -48,5 +45,9 @@ class TasksController < ApplicationController
 
     def task_params
       params.require(:task).permit(:title, :description, :due_date, :status, user_ids: [])
+    end
+
+    def find_task
+      @task = Task.find(params[:id])
     end
 end
