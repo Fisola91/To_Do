@@ -1,4 +1,4 @@
-class CreateTask
+class CreateTasksAction
 
   def initialize(params, current_user)
     @params = params

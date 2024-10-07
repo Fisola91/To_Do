@@ -17,7 +17,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    create_task_result = CreateTask.new(task_params, current_user).call
+    create_task_result = CreateTasksAction.new(task_params, current_user).call
 
     if create_task_result[:success]
       redirect_to tasks_path, notice: 'Task was successfully created.'
