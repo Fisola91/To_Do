@@ -17,10 +17,12 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = current_user.created_tasks.new(task_params)
-    if @task.save
+    create_task_result = CreateTasksAction.new(task_params, current_user).call
+
+    if create_task_result[:success]
       redirect_to tasks_path, notice: 'Task was successfully created.'
     else
+      @task = create_task_result[:task]
       render "new", status: :unprocessable_entity
     end
   end
