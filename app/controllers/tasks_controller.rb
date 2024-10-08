@@ -31,9 +31,12 @@ class TasksController < ApplicationController
   end
 
   def update
-    if @task.update(task_params)
+    update_task_result = UpdateTasksAction.new(task_params:, task: @task).call
+
+    if update_task_result[:success]
       redirect_to task_path(@task)
     else
+      @task = update_task_result[:task]
       render :edit
     end
   end
