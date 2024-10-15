@@ -7,9 +7,9 @@ class TaskPolicy < ApplicationPolicy
 
   class Scope < ApplicationPolicy::Scope
     # NOTE: Be explicit about which records you allow access to!
-    # def resolve
-    #   scope.all
-    # end
+    def resolve
+      scope.all
+    end
   end
 
   def show?
@@ -22,5 +22,21 @@ class TaskPolicy < ApplicationPolicy
 
   def create?
     return true
+  end
+
+  def edit?
+    return update?
+  end
+
+  def update?
+    return record.task_creator == user
+  end
+
+  def index?
+    return true
+  end
+
+  def destroy?
+    return record.task_creator == user
   end
 end
