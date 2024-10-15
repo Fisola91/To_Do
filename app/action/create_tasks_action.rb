@@ -1,4 +1,5 @@
 class CreateTasksAction
+  include Pundit::Authorization
 
   def initialize(params, current_user)
     @params = params
@@ -7,6 +8,7 @@ class CreateTasksAction
 
   def call
     task = current_user.created_tasks.new(params)
+    authorize(task, :create?)
 
     if task.save
       { success: true, task: task }

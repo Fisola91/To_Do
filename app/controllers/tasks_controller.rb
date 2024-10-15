@@ -2,11 +2,12 @@ class TasksController < ApplicationController
   before_action :find_task, only: %i(show edit update destroy)
 
   def index
-    @tasks = Task.all
+    @tasks = policy_scope(Task).all
   end
 
   def new
     @task = Task.new
+    authorize @task
   end
 
   def show
@@ -54,5 +55,6 @@ class TasksController < ApplicationController
 
     def find_task
       @task = Task.find(params[:id])
+      authorize @task
     end
 end
