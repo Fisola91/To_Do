@@ -39,7 +39,7 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    delete_task_result = DeleteTasksAction.new(@task)
+    delete_task_result = DeleteTasksAction.new(task: @task).call
 
     if delete_task_result[:success]
       redirect_to tasks_path
